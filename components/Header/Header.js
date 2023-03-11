@@ -4,7 +4,7 @@ export default function Header() {
     return (
         <header>
             <nav>
-                <Link>
+                <Link href="/profile">
                     Profile
                 </Link>
             </nav>
