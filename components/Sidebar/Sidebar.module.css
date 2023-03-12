@@ -1,5 +1,5 @@
 .Sidebar {
-    height: 700px;
-    background-color: #25272C;
     padding: 25px;
+    position: fixed;
+    width: 25%;
 }

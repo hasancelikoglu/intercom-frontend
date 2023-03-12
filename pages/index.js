@@ -3,15 +3,19 @@ import Header from '@/components/Header/Header'
 import Sidebar from '@/components/Sidebar/Sidebar'
 import AllPosts from '@/components/AllPosts/AllPosts'
 import Topics from '@/components/Topics/Topics'
+import Head from 'next/head'
 
 export default function Home() {
   return (
     <>
-      <Header/>
+    <Head>
+      <title>Home</title>
+    </Head>
+      <Header />
       <div className={styles.home}>
-          <Sidebar/>
-          <AllPosts/>
-          <Topics/>
+        <Sidebar />
+        <AllPosts />
+        <Topics />
       </div>
     </>
   )

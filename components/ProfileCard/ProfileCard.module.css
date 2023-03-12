@@ -1,0 +1,65 @@
+.ProfileCard {
+    width: 100%;
+    height: 500px;
+    background-color: #25272C;
+    border-radius: 20px;
+    justify-content: space-evenly;
+}
+
+.ProfileCard, .ProfileCard .primaryInfos, .primaryInfos .fullnameAndUsername {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.primaryInfos {
+
+}
+
+.fullnameAndUsername {
+    color: white;
+}
+
+.profileImage {
+    border-radius: 100%;
+}
+
+.fullname {
+    font-size: 25px;
+    margin-top: 15px;
+}
+
+.username {
+    margin: 5px;
+}
+
+
+
+.otherInfos {
+    display: flex;
+
+}
+
+.otherInfos .followers, .otherInfos .following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin: 25px;
+}
+
+.count {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+
+.viewProfile {
+    color: white;
+    padding: 20px;
+
+}
+
+.viewProfile:hover {
+    color: #ddd;
+}
