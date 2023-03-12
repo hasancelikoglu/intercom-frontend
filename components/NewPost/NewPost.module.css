@@ -1,0 +1,35 @@
+.NewPost {
+    background-color: #25272C;
+    display: flex;
+    padding: 20px 15px;
+    border-radius: 20px;
+}
+
+.NewPost .authorImage {
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+.NewPost .content {
+    min-height: 50px;
+    width: 90%;
+    background-color: #373940;
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    outline: none;
+    resize: both;
+}
+
+.content[contenteditable]:empty::before {
+    content: "What do you think? Tell us something...";
+    color: white;
+    opacity: 80%;
+    font-style: italic;
+}
+
+.NewPost .content::placeholder {
+    opacity: 80%;
+    font-style: italic;
+}

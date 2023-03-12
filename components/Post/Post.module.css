@@ -1,0 +1,60 @@
+.Post {
+    background-color: #25272C;
+    margin: 20px 0px;
+    padding: 20px 15px;
+    border-radius: 20px;
+    display: flex;
+}
+
+.authorImage {
+    border-radius: 100%;
+}
+
+.Post .main {
+    width: 100%;
+    color: white;
+    margin: 0 20px;
+    font-weight: 200;
+}
+
+.main .authorInfos {
+    display: flex;
+    align-items: center;
+}
+
+.authorFullname {
+    font-size: 18px;
+    margin-right: 10px;
+    font-weight: bolder;
+}
+
+.authorUsername {
+    font-size: 16px;
+    font-style: italic;
+    opacity: 80%;
+}
+
+.created {
+    font-size: 16px;
+    font-style: italic;
+    opacity: 80%;
+    margin: 2px 0;
+}
+
+.main .content {
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.Post .threeDot {
+    display: flex;
+    padding: 0 5px;
+}
+
+.threeDot .dot {
+    height: 5px;
+    width: 5px;
+    border-radius: 100%;
+    background-color: white;
+    margin: 2px;
+}

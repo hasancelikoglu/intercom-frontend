@@ -1,5 +1,4 @@
 .Sidebar {
+    display: flex;
     padding: 25px;
-    position: fixed;
-    width: 25%;
 }

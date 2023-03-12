@@ -1,13 +1,11 @@
 .TopicsArea {
-    padding: 25px;
     display: flex;
+    padding: 25px;
 }
 
 .Topics {
     height: 650px;
     background-color: #25272C;
     border-radius: 20px;
-    position: fixed;
-    width: 25%;
-    right: 25px;
+    width: 100%;
 }

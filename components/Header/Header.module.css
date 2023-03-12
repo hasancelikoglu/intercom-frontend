@@ -2,14 +2,18 @@
     display: flex;
     justify-content: center;
     height: 90px;
+    width: 100%;
+    z-index: 3;
 }
 
 .navbar {
+    background-color: #19191b;
     height: 90px;
     position: fixed;
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: 0 80px;
     align-items: center;
 }
 
