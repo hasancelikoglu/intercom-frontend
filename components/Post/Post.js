@@ -1,11 +1,12 @@
 import Image from 'next/image'
+import PostInteractions from '../PostInteractions/PostInteractions'
 import styles from './Post.module.css'
 
 export default function Post({ content }) {
     return (
         <div className={styles.Post}>
 
-            <Image className={styles.authorImage} src="/profile.webp" width={50} height={50} />
+            <Image className={styles.authorImage} src="/profile.webp" width={50} height={50} alt="profile-image" />
 
             <div className={styles.main}>
                 <div className={styles.infos}>
@@ -16,11 +17,12 @@ export default function Post({ content }) {
                     <p className={styles.created}>Few minutes ago</p>
                 </div>
                 <p className={styles.content}>{content}</p>
-                <div className={styles.actions}>
-                    <button>like</button>
-                    <button>comment</button>
-                </div>
+            
+                
+            <PostInteractions/>
+                
             </div>
+
 
 
             <div className={styles.threeDot}>
