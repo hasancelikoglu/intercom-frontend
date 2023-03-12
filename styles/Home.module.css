@@ -1,0 +1,5 @@
+.home {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  background-color: white;
+}
