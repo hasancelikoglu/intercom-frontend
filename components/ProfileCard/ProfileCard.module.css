@@ -12,15 +12,11 @@
     align-items: center;
 }
 
-.primaryInfos {
-
-}
-
-.fullnameAndUsername {
+.primaryInfos fullnameAndUsername {
     color: white;
 }
 
-.profileImage {
+.primaryInfos .profileImage {
     border-radius: 100%;
 }
 
