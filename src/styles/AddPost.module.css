@@ -1,0 +1,26 @@
+.AddPost {
+    display: flex;
+}
+
+.bodyArea {
+    width: 1000px;
+}
+
+.bodyInput {
+    height: 20px;
+    outline: none;
+    cursor: text;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.bodyInput[placeholder]:empty:before {
+    height: 20px;
+    content: "What do you think? Tell us something...";
+    font-style: italic;
+    font-size: 14px;
+    color: black;
+    opacity: 60%;
+}
