@@ -42,6 +42,7 @@ export function AddPost() {
                 <Textarea style={{ width: "100%", marginLeft: "10px"}}
                     placeholder="What do you think? Tell us something..."
                     autosize
+                    maxLength={250}
                     name="content"
                 />
             </div>
