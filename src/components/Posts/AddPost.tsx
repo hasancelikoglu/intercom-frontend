@@ -7,6 +7,8 @@ import {
     Paper,
     rem,
     Textarea,
+    Button,
+    Flex,
 } from '@mantine/core';
 
 import styles from '../../styles/AddPost.module.css'
@@ -36,19 +38,21 @@ export function AddPost() {
     const { classes } = useStyles();
     return (
         <Paper withBorder radius="md" className={classes.comment}>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <Flex align="center" >
                 <Avatar src="" alt="" radius="xl" />
 
-                <Textarea style={{ width: "100%", marginLeft: "10px"}}
+                <Textarea style={{ width: "100%", marginLeft: "10px" }}
                     placeholder="What do you think? Tell us something..."
                     autosize
                     maxLength={250}
                     name="content"
                 />
-            </div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-                <button style={{ padding: "5px 15px", backgroundColor: "#228be6", border: "none", color: "white", borderRadius: "5px", cursor: "pointer" }}>Share</button>
-            </div>
+            </Flex>
+            <Flex justify="flex-end" mt={20}>
+                <Button>
+                    Share
+                </Button>
+            </Flex>
         </Paper>
     );
 }

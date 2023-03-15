@@ -7,6 +7,7 @@ import {
 } from '@tabler/icons-react';
 import { UserButton } from './UserButton';
 import { LinksGroup } from './LinksGroup';
+import { NavLink } from 'react-router-dom';
 
 const mockdata = [
   { label: 'Home', icon: IconHome, link: "/" },
@@ -17,6 +18,7 @@ const mockdata = [
   {
     label: 'Settings',
     icon: IconSettings,
+    link: "",
     links: [
       { label: 'Profile settings', link: '/profile/settings' },
       { label: 'Logout', link: '/logout' }
@@ -65,10 +67,10 @@ const useStyles = createStyles((theme) => ({
 
 export default function NavbarNested() {
   const { classes } = useStyles();
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  const links = mockdata.map((item) =>  <LinksGroup {...item} key={item.label}/>);
 
   return (
-    <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
+    <Navbar height="100%" width={{ sm: 300 }} p="xl" className={classes.navbar}>
       <Navbar.Section className={classes.header}>
         <Group position="apart">
           {/* <Logo width={rem(120)} /> */}
