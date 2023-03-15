@@ -86,6 +86,7 @@ export default function NavbarNested() {
         <UserButton
           image=""
           name="Hasan Çelikoğlu"
+          username="hasancelikoglu92"
           email="hasancelikoglu92@gmail.com"
         />
       </Navbar.Section>

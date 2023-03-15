@@ -1,4 +1,4 @@
-import { Container } from "@mantine/core";
+import { Container, Text } from "@mantine/core";
 import { Topic } from "./Topic";
 const topics = [
     {label: "Topic 1", link: "topic-1"},
@@ -12,6 +12,7 @@ export default function Topics() {
     return (
         <>
             <Container w="100%" h={250}>
+                <Text size={30}>Topics</Text>
                 {topics.map(topic => <Topic topic={topic} />)}
             </Container>
         </>
