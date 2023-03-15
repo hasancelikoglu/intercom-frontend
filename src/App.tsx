@@ -1,13 +1,16 @@
 import { MantineProvider, Text } from '@mantine/core';
-import { Login } from './pages/Login';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
 import { Register } from './pages/Register';
 
 export default function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Text>Welcome to Mantine!</Text>
-      <Login />
-      <Register/>
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path="*" element={<h1>404 - Page not found!</h1>} />
+        <Route path="/" element={<Register/>} />
+      </Routes>
     </MantineProvider>
   );
 }
