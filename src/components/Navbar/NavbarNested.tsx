@@ -1,6 +1,6 @@
 import { Navbar, Group, Code, ScrollArea, createStyles, rem } from '@mantine/core';
 import {
-  IconGauge,
+  IconHome,
   IconHash,
   IconSettings,
   IconUser
@@ -9,16 +9,17 @@ import { UserButton } from './UserButton';
 import { LinksGroup } from './LinksGroup';
 
 const mockdata = [
-  { label: 'Profile', icon: IconUser },
+  { label: 'Home', icon: IconHome, link: "/" },
+  { label: 'Profile', icon: IconUser, link: "/profile" },
 
-  {label: 'Topics', icon: IconHash},
+  {label: 'Topics', icon: IconHash, link: "/topics"},
   
   {
     label: 'Settings',
     icon: IconSettings,
     links: [
-      { label: 'Profile settings', link: '/' },
-      { label: 'Logout', link: '/' }
+      { label: 'Profile settings', link: '/profile/settings' },
+      { label: 'Logout', link: '/logout' }
     ],
   }
 ];
@@ -27,6 +28,7 @@ const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
     paddingBottom: 0,
+    position: "fixed"
   },
 
   header: {
@@ -38,6 +40,8 @@ const useStyles = createStyles((theme) => ({
     borderBottom: `${rem(1)} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
+    display: "flex",
+    justifyContent: "center"
   },
 
   links: {
@@ -78,9 +82,9 @@ export default function NavbarNested() {
 
       <Navbar.Section className={classes.footer}>
         <UserButton
-          image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-          name="Ann Nullpointer"
-          email="anullpointer@yahoo.com"
+          image=""
+          name="Hasan Çelikoğlu"
+          email="hasancelikoglu92@gmail.com"
         />
       </Navbar.Section>
     </Navbar>

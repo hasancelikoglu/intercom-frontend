@@ -1,0 +1,26 @@
+.authorInfos {
+    display: flex;
+    align-items: center;
+}
+
+.authorName {
+    margin-right: 5px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.buttons .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.button span {
+    margin: 5px;
+}
+
