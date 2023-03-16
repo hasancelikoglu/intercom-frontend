@@ -33,7 +33,7 @@ export function UserButton({ image, name, username, email }: UserButtonProps) {
   const { classes } = useStyles();
 
   return (
-    <NavLink to={"/profile"}>
+    <NavLink to={"/user"}>
       <UnstyledButton className={classes.user}>
         <Group>
           <Avatar src={image} radius="xl" />

@@ -20,10 +20,10 @@ interface UserCardImageProps {
   stats: { label: string; value: string }[];
 }
 
-export function Profile() {
+export function User() {
   const { classes, theme } = useStyles();
 
-  const [user, setUser] = useState({image: "https://fastly.picsum.photos/id/524/1920/1080.webp?hmac=S77ntGrY6huW6aXgCxY0M6nqqYkgnu_t-I_FZKaWh5A", avatar: "", name: "Hasan Çelikoğlu", username: "@hasancelikoglu0", stats: [{label: "Followers", value: "32"}, {label: "Following", value: "17"}, {label: "Posts", value: "43"}]})
+  const [user, setUser] = useState({image: "https://fastly.picsum.photos/id/946/1178/400.webp?hmac=Mkcp-vXlq8ujb4xEoCitAJQWtzvboQEisgNCsB06kaY", avatar: "", name: "Hasan Çelikoğlu", username: "@hasancelikoglu0", stats: [{label: "Followers", value: "32"}, {label: "Following", value: "17"}, {label: "Posts", value: "43"}]})
 
   const items = user.stats.map((stat) => (
     <div key={stat.label}>

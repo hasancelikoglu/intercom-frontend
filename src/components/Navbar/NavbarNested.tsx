@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 
 const mockdata = [
   { label: 'Home', icon: IconHome, link: "/" },
-  { label: 'Profile', icon: IconUser, link: "/profile" },
+  { label: 'Profile', icon: IconUser, link: "/user" },
 
   {label: 'Topics', icon: IconHash, link: "/topics"},
   

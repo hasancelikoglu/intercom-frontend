@@ -4,7 +4,8 @@ import NavbarNested from './components/Navbar/NavbarNested';
 import Posts from './components/Posts/Posts';
 import Topics from './components/Topics/Topics';
 import Home from './pages/Home';
-import { Profile } from './Profile/Profile';
+import { EditProfile } from './Profile/EditProfile';
+import { User } from './Profile/User';
 
 export default function App() {
   return (
@@ -12,15 +13,16 @@ export default function App() {
     withGlobalStyles
     withNormalizeCSS
     theme={{
-      colorScheme: 'light'
+      colorScheme: 'dark'
     }}
     >
       <Routes>
         <Route path='/' element={<Home/>} >
           <Route index element={<Posts/>} />
-          <Route path='profile' element={<Profile/>}>
-            <Route path='settings' element={<h1>Profile settings</h1>} />
+          <Route path='user' element={<User/>}>
+            
           </Route>
+          <Route path='profile/settings' element={<EditProfile/>} />
           <Route path='topics' element={<Topics/>} />
         </Route>
       </Routes>
