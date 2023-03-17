@@ -39,7 +39,7 @@ export function AddPost() {
     const [hashtags, setHashtags] = useState<RegexType>(null);
 
     const findHashtags = (searchText: string) => {
-        var regexp = /\B\#\w+\b/g
+        var regexp = /#[\w\u00C0-\u017F]+/g;
         let result = searchText.match(regexp);
         if (result) {
             setHashtags(result)
