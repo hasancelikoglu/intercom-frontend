@@ -1,9 +1,6 @@
 import {
     createStyles,
-    Text,
     Avatar,
-    Group,
-    TypographyStylesProvider,
     Paper,
     rem,
     Textarea,
@@ -11,8 +8,6 @@ import {
     Flex,
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
-
-import styles from '../../styles/AddPost.module.css'
 
 const useStyles = createStyles((theme) => ({
     comment: {
@@ -76,7 +71,7 @@ export function AddPost() {
 
             </Flex>
             
-            <Flex justify="space-between" ml={45} mt={20}>
+            <Flex justify="space-between" ml={45} mt={10}>
             <div>
             {hashtags && hashtags.map((hashtag, index) => (
                 <Button key={hashtag} bg="green" compact  style={{margin: "5px"}}>{hashtag}</Button>
