@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <Flex>
             <NavbarNested/>
-            <Center p="20px 100px" ml="300px">
+            <Center w="100%" p="20px 100px" ml="300px">
                 <Outlet/>
             </Center>
         </Flex>
