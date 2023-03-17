@@ -1,6 +1,5 @@
 import { createStyles, Card, Avatar, Text, Group, Button, rem } from '@mantine/core';
 import { useState } from 'react';
-import { PostCard } from '../components/Posts/PostCard';
 
 const useStyles = createStyles((theme) => ({
   card: {
