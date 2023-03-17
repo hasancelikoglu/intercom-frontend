@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, Image, SimpleGrid } from '@mantine/core';
+import { Text, SimpleGrid } from '@mantine/core';
 import { Dropzone, IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone';
 import ReactCrop from 'react-image-crop'
 import { Crop } from 'react-image-crop/dist/types';

@@ -1,11 +1,10 @@
 import { MantineProvider } from '@mantine/core';
 import { Route, Routes } from 'react-router-dom';
-import NavbarNested from './components/Navbar/NavbarNested';
 import Posts from './components/Posts/Posts';
 import Topics from './components/Topics/Topics';
 import Home from './pages/Home';
-import { EditProfile } from './Profile/EditProfile';
-import { User } from './Profile/User';
+import { EditProfile } from './components/Profile/EditProfile';
+import { User } from './components/Profile/User';
 
 export default function App() {
   return (

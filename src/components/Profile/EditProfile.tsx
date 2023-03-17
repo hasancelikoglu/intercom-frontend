@@ -1,6 +1,5 @@
-import { Button, Container, Flex, Group, SimpleGrid, Text, Textarea, TextInput, Title } from "@mantine/core";
+import { Container, Flex, Group, SimpleGrid, Text, TextInput, Title } from "@mantine/core";
 import { DropZone } from "./DropZone";
-import { useState } from "react";
 
 export function EditProfile() {
     
