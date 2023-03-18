@@ -6,6 +6,7 @@ import {
     TypographyStylesProvider,
     Paper,
     rem,
+    Flex,
 } from '@mantine/core';
 
 import {
@@ -16,6 +17,7 @@ import { useState } from 'react';
 
 import styles from '../../styles/PostCard.module.css'
 import { AddComment } from './AddComment';
+import { MenuButton } from './MenuButton';
 
 const useStyles = createStyles((theme) => ({
     comment: {
@@ -55,7 +57,8 @@ export function PostCard({ postedAt, body, author }: PostInfos) {
     return (
         <div>
             <Paper withBorder radius="md" className={classes.comment}>
-                <Group>
+                <Flex align="center" justify="space-between">
+                    <Group>
                     <Avatar src={author.image} alt={author.name} radius="xl" />
                     <div className={styles.postInfos}>
                         <div className={styles.authorInfos}>
@@ -66,16 +69,11 @@ export function PostCard({ postedAt, body, author }: PostInfos) {
                             {postedAt}
                         </Text>
                     </div>
+                    </Group>
 
-                    <div className={styles.buttons}>
-                        <div className={`${styles.button} ${styles.like}`}>
-
-                        </div>
-                        <div className={`${styles.button} ${styles.comment}`}>
-
-                        </div>
-                    </div>
-                </Group>
+                    
+                    <MenuButton/>
+                </Flex>
                 <TypographyStylesProvider className={classes.body}>
                     <div className={classes.content} dangerouslySetInnerHTML={{ __html: body }} />
 
