@@ -1,4 +1,4 @@
-import { Navbar, Group, Code, ScrollArea, createStyles, rem } from '@mantine/core';
+import { Navbar, Group, Code, ScrollArea, createStyles, rem, Burger } from '@mantine/core';
 import {
   IconHome,
   IconHash,
@@ -8,6 +8,7 @@ import {
 import { UserButton } from './UserButton';
 import { LinksGroup } from './LinksGroup';
 import { NavLink } from 'react-router-dom';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 
 const mockdata = [
   { label: 'Home', icon: IconHome, link: "/" },
@@ -68,28 +69,39 @@ const useStyles = createStyles((theme) => ({
 export default function NavbarNested() {
   const { classes } = useStyles();
   const links = mockdata.map((item) =>  <LinksGroup {...item} key={item.label}/>);
+  const matches = useMediaQuery('(max-width: 768px)')
+  const [opened, { toggle }] = useDisclosure(false);
+        const label = opened ? 'Close navigation' : 'Open navigation';
+
+  console.log(matches)
 
   return (
-    <Navbar height="100%" width={{ sm: 300, xs: 70 }} p="xl" className={classes.navbar}>
-      <Navbar.Section className={classes.header}>
-        <Group display={{sm: "block", xs: "none"}} position="apart">
-          {/* <Logo width={rem(120)} /> */}
-          <h3>SOCIAL MEDIA APP</h3>
-        </Group>
-      </Navbar.Section>
-
-      <Navbar.Section grow className={classes.links} component={ScrollArea}>
-        <div className={classes.linksInner}>{links}</div>
-      </Navbar.Section>
-
-      <Navbar.Section className={classes.footer}>
-        <UserButton
-          image=""
-          name="Hasan Çelikoğlu"
-          username="hasancelikoglu92"
-          email="hasancelikoglu92@gmail.com"
-        />
-      </Navbar.Section>
-    </Navbar>
+    <div style={{padding: "20px 10px"}}>
+    
+    {matches && <Burger opened={opened} onClick={toggle} aria-label={label} />}
+      {(opened || !matches) && (
+        <Navbar height="100%" width={{base: "100%", sm: 300}} p="xl" className={classes.navbar}>
+        <Navbar.Section className={classes.header}>
+          <Group position="apart">
+            {matches && <Burger style={{position: "absolute", left: "10px"}} opened={true} onClick={toggle} aria-label={label} />}
+            <h3>SOCIAL MEDIA APP</h3>
+          </Group>
+        </Navbar.Section>
+  
+        <Navbar.Section grow className={classes.links} component={ScrollArea}>
+          <div className={classes.linksInner}>{links}</div>
+        </Navbar.Section>
+  
+        <Navbar.Section className={classes.footer}>
+          <UserButton
+            image=""
+            name="Hasan Çelikoğlu"
+            username="hasancelikoglu92"
+            email="hasancelikoglu92@gmail.com"
+          />
+        </Navbar.Section>
+      </Navbar>
+      )}
+    </div>
   );
 }
