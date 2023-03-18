@@ -89,7 +89,7 @@ export default function NavbarNested() {
         </Navbar.Section>
   
         <Navbar.Section grow className={classes.links} component={ScrollArea}>
-          <div className={classes.linksInner}>{links}</div>
+          <div onClick={toggle} className={classes.linksInner}>{links}</div>
         </Navbar.Section>
   
         <Navbar.Section className={classes.footer}>
