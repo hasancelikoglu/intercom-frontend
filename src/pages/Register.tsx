@@ -13,6 +13,7 @@ import {
 import { IconArrowBackUp } from '@tabler/icons-react';
 
 import { useNavigate } from 'react-router-dom';
+import { PasswordStrength } from '../components/Auth/PasswordInput';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -40,7 +41,7 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export function Login() {
+export function Register() {
     const { classes } = useStyles();
     const navigate = useNavigate()
     return (
@@ -48,20 +49,20 @@ export function Login() {
             <Paper className={classes.form} radius={0} p={30}>
                 <IconArrowBackUp color='white' onClick={() => navigate(-1)} />
                 <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-                    Welcome back to Intercom!
+                    Register to Intercom!
                 </Title>
 
                 <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
-                <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
-                <Checkbox label="Keep me logged in" mt="xl" size="md" />
+                <TextInput label="Fullname" placeholder="John Doe" size="md" mt="md" />
+                <PasswordStrength/>
                 <Button fullWidth mt="xl" size="md">
-                    Login
+                    Register
                 </Button>
 
                 <Text ta="center" mt="md">
-                    Don&apos;t have an account?{' '}
-                    <Anchor<'a'> href="/auth/register" weight={700}>
-                        Register
+                    Have an account ?{' '}
+                    <Anchor<'a'> href="/auth/login" weight={700}>
+                        Login
                     </Anchor>
                 </Text>
             </Paper>
