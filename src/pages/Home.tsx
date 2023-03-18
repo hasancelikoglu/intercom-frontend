@@ -1,4 +1,4 @@
-import { Center, Flex } from '@mantine/core'
+import { AppShell, Center, Flex, Navbar } from '@mantine/core'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import NavbarNested from '../components/Navbar/NavbarNested'
 import Posts from '../components/Posts/Posts'
@@ -6,11 +6,17 @@ import Posts from '../components/Posts/Posts'
 
 export default function Home() {
     return (
-        <Flex>
-            <NavbarNested/>
-            <Center w="100%" p="20px 100px" ml="300px">
-                <Outlet/>
-            </Center>
-        </Flex>
+
+        <AppShell
+      padding="md"
+      navbar={<NavbarNested/>}
+      styles={(theme) => ({
+        main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+      })}
+    >
+      <Center p={{base: "10px 30px", lg: "20px 100px"}}>
+        <Outlet/>
+      </Center>
+    </AppShell>
     )
 }
