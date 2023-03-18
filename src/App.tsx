@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import { EditProfile } from './components/Profile/EditProfile';
 import { User } from './components/Profile/User';
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         </Route>
 
         <Route path='/auth/login' element={<Login/>} />
+        <Route path='/auth/register' element={<Register/>} />
       </Routes>
     </MantineProvider>
   );
