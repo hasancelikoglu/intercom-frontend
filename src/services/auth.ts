@@ -5,6 +5,10 @@ const HTTP = axios.create({
 
 export const register = async (data: Object) => {
     const promise = await HTTP.post("/auth/register", data)
+    return promise
+}
 
+export const login = async (data: Object) => {
+    const promise = await HTTP.post("/auth/login", data)
     return promise
 }

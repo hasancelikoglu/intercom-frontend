@@ -62,7 +62,7 @@ export function Register() {
 
     const disabled = strength < 100 || data.email === "" || data.name === "" || data.password === ""
 
-    const submitHandle = async(e: any) => {
+    const registerHandle = async(e: any) => {
         e.preventDefault()
 
         try {
@@ -79,12 +79,12 @@ export function Register() {
         <div className={classes.wrapper}>
             <Toaster/>
             <Paper className={classes.form} radius={0} p={30}>
-                <IconArrowBackUp color='white' onClick={() => navigate(-1)} />
+                <IconArrowBackUp color='white' onClick={() => navigate("/")} />
                 <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
                     Register to Intercom!
                 </Title>
 
-                <form onSubmit={submitHandle}>
+                <form onSubmit={registerHandle}>
                     <TextInput type="email" required value={data.email} onChange={e => setData((data: any) => ({ ...data, email: e.target.value }))} label="Email address" placeholder="hello@gmail.com" size="md" />
                     <TextInput required value={data.name} onChange={e => setData((data: any) => ({ ...data, name: e.target.value }))} label="Fullname" placeholder="John Doe" size="md" mt="md" />
                     <PasswordStrength data={data} setData={setData} />

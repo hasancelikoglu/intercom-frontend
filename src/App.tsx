@@ -8,6 +8,9 @@ import { User } from './components/Profile/User';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { NotFound } from './pages/404';
+import { useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { userAtom } from './atoms/authAtoms';
 
 export default function App() {
   return (

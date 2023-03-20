@@ -11,8 +11,13 @@ import {
     rem,
 } from '@mantine/core';
 import { IconArrowBackUp } from '@tabler/icons-react';
+import { useAtom } from 'jotai';
+import { useState } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 
 import { useNavigate } from 'react-router-dom';
+import { userAtom } from '../atoms/authAtoms';
+import { login } from '../services/auth';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -40,23 +45,48 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
+interface LoginData {
+    email: string;
+    password: string;
+}
+
 export function Login() {
     const { classes } = useStyles();
     const navigate = useNavigate()
+    const [data, setData] = useState<LoginData>({email: "", password: ""})
+    const [, setUser] = useAtom(userAtom)
+
+    const disabled = data.email === "" || data.password === ""
+
+    const loginHandle = async (e:any) => {
+        e.preventDefault()
+
+        try {
+            const response = await login(data)
+            localStorage.setItem("token", response.data.accessToken)
+            setUser({name: "Geçici isim", email: data.email})
+            navigate("/")
+        } catch (error: any) {
+            return toast.error(error.response.data.message)
+        }
+    }
+
     return (
         <div className={classes.wrapper}>
+            <Toaster/>
             <Paper className={classes.form} radius={0} p={30}>
-                <IconArrowBackUp color='white' onClick={() => navigate(-1)} />
+                <IconArrowBackUp color='white' onClick={() => navigate("/")} />
                 <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
                     Welcome back to Intercom!
                 </Title>
 
-                <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
-                <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
-                <Checkbox label="Keep me logged in" mt="xl" size="md" />
-                <Button fullWidth mt="xl" size="md">
-                    Login
-                </Button>
+                <form onSubmit={loginHandle}>
+                    <TextInput value={data.email} onChange={e => setData((data: any) => ({...data, email: e.target.value}))} type="email" label="Email address" placeholder="hello@gmail.com" size="md" />
+                    <PasswordInput value={data.password} onChange={e => setData((data: any) => ({...data, password: e.target.value }))} label="Password" placeholder="Your password" mt="md" size="md" />
+                    <Button disabled={disabled} type='submit' fullWidth mt="xl" size="md">
+                        Login
+                    </Button>
+                </form>
 
                 <Text ta="center" mt="md">
                     Don&apos;t have an account?{' '}
