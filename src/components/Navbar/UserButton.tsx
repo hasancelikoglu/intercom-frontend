@@ -5,9 +5,13 @@ import {
   Avatar,
   Text,
   createStyles,
+  Button,
+  Flex,
 } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
+import { useAtom } from 'jotai';
 import { NavLink } from 'react-router-dom';
+import { userAtom } from '../../atoms/authAtoms';
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -31,23 +35,30 @@ interface UserButtonProps extends UnstyledButtonProps {
 
 export function UserButton({ image, name, username, email }: UserButtonProps) {
   const { classes } = useStyles();
+  const [user] = useAtom(userAtom)
 
   return (
-    <NavLink to={"/user"}>
+    <NavLink to={user.user === false ? "/auth/login" : "/user"}>
       <UnstyledButton className={classes.user}>
+      {user.user !== false ? (
         <Group>
-          <Avatar src={image} radius="xl" />
+        <Avatar src={image} radius="xl" />
 
-          <div style={{ flex: 1 }}>
-            <Text size="sm" weight={500}>
-              {name}
-            </Text>
+        <div style={{ flex: 1 }}>
+          <Text size="sm" weight={500}>
+            {name}
+          </Text>
 
-            <Text color="dimmed" size="xs">
-              {email}
-            </Text>
-          </div>
-        </Group>
+          <Text color="dimmed" size="xs">
+            {email}
+          </Text>
+        </div>
+      </Group>
+      ) : (
+        <Flex justify="center" align="center">
+            <Button w="100%">Login</Button>
+        </Flex>
+      )}
       </UnstyledButton>
       </NavLink >
     );

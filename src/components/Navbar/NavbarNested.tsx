@@ -73,8 +73,6 @@ export default function NavbarNested() {
   const [opened, { toggle }] = useDisclosure(false);
         const label = opened ? 'Close navigation' : 'Open navigation';
 
-  console.log(matches)
-
   return (
     <div style={{padding: "20px 10px"}}>
     
