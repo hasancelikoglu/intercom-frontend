@@ -14,6 +14,8 @@ import { tokenAtom, userAtom } from './atoms/authAtoms';
 import { getUser } from './services/user';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { setUser } from './utils/auth';
+import UserRoute from './components/PrivateRoutes/UserRoute';
+import AuthRoute from './components/PrivateRoutes/AuthRoute';
 
 export default function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -57,15 +59,15 @@ export default function App() {
           <Routes>
             <Route path='/' element={<Home />} >
               <Route index element={<Posts />} />
-              <Route path='user' element={<User />}>
+              <Route path='user' element={<UserRoute><User /></UserRoute>}>
 
               </Route>
-              <Route path='profile/settings' element={<EditProfile />} />
+              <Route path='profile/settings' element={<UserRoute><EditProfile /></UserRoute>} />
               <Route path='topics' element={<Topics />} />
             </Route>
 
-            <Route path='/auth/login' element={<Login />} />
-            <Route path='/auth/register' element={<Register />} />
+            <Route path='/auth/login' element={<AuthRoute><Login /></AuthRoute>} />
+            <Route path='/auth/register' element={<AuthRoute><Register /></AuthRoute>} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </MantineProvider>

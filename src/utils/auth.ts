@@ -1,5 +1,5 @@
 import { getDefaultStore } from "jotai";
-import { userAtom } from "../atoms/authAtoms";
+import { tokenAtom, userAtom } from "../atoms/authAtoms";
 
 const defaultStore = getDefaultStore()
 
@@ -12,5 +12,9 @@ export const setUser = (user: any) => {
         followers: user.followers.length,
         following: user.following.length,
         posts: user.posts.length
-      }))
+    }))
+}
+
+export const setToken = (token: string) => {
+    defaultStore.set(tokenAtom, token)
 }
