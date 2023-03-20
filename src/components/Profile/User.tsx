@@ -21,23 +21,23 @@ interface UserCardImageProps {
   stats: { label: string; value: string }[];
 }
 
-const stat = ["followers", "following", "posts"]
+const stats = ["followers", "following", "posts"]
 
 export function User() {
   const { classes, theme } = useStyles();
 
-  const [user, setUser] = useAtom(userAtom)
+  const [user] = useAtom(userAtom)
 
-  // const items = stats.map((stat, index) => (
-  //   <div key={index}>
-  //     <Text ta="center" fz="lg" fw={500}>
-  //       {user[stat]}
-  //     </Text>
-  //     <Text ta="center" fz="sm" c="dimmed">
-  //       {stat}
-  //     </Text>
-  //   </div>
-  // ));
+  const items = stats.map((stat, index) => (
+    <div key={index}>
+      <Text ta="center" fz="lg" fw={500}>
+        {user[stat]}
+      </Text>
+      <Text ta="center" fz="sm" c="dimmed">
+        {stat}
+      </Text>
+    </div>
+  ));
 
   return (
     <Card withBorder padding="xl" radius="md" w="100%" className={classes.card}>
@@ -50,7 +50,7 @@ export function User() {
         {user.username}
       </Text>
       <Group mt="md" position="center" spacing={30}>
-        {/* {items} */}
+        {items}
       </Group>
       {/* <Button
         fullWidth

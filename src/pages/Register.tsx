@@ -20,6 +20,7 @@ import { PasswordStrength } from '../components/Auth/PasswordInput';
 import { register } from '../services/auth';
 import { useAtom } from 'jotai';
 import { strengthAtom, userAtom } from '../atoms/authAtoms';
+import { getUser } from '../services/user';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -68,7 +69,8 @@ export function Register() {
         try {
             const response = await register(data)
             localStorage.setItem("token", response.data.accessToken)
-            setUser({email: data.email, name: data.name})
+            const user = await getUser(response.data.accessToken)
+            setUser(user.data)
             navigate("/")
         } catch (error: any) {
             toast.error(error.response.data.message)

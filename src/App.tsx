@@ -13,6 +13,7 @@ import { useAtom } from 'jotai';
 import { tokenAtom, userAtom } from './atoms/authAtoms';
 import { getUser } from './services/user';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { setUser } from './utils/auth';
 
 export default function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -27,21 +28,14 @@ export default function App() {
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
   const [token, setToken] = useAtom(tokenAtom)
-  const [user, setUser] = useAtom(userAtom)
+  const [user] = useAtom(userAtom)
 
   useEffect(() => {
     if (token) {
       (async () => {
         try {
           const response = await getUser(token)
-          setUser({
-            email: response.data.email,
-            name: response.data.name,
-            avatar: "", username: "user" + response.data.username,
-            followers: response.data.followers.length,
-            following: response.data.following.length,
-            posts: response.data.posts.length
-          })
+          setUser(response.data)
         } catch (error: any) {
           console.log(error)
         }
