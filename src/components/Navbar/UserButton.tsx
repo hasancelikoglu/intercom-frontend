@@ -26,14 +26,15 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface UserButtonProps extends UnstyledButtonProps {
-  image: string;
-  name: string;
-  username: string;
-  email: string;
-}
+// interface UserButtonProps extends UnstyledButtonProps {
+//   image: string;
+//   name: string;
+//   username: string;
+//   email: string;
+// }
 
-export function UserButton({ image, name, username, email }: UserButtonProps) {
+export function UserButton() {
+  
   const { classes } = useStyles();
   const [user] = useAtom(userAtom)
 
@@ -42,15 +43,15 @@ export function UserButton({ image, name, username, email }: UserButtonProps) {
       <UnstyledButton className={classes.user}>
       {user.user !== false ? (
         <Group>
-        <Avatar src={image} radius="xl" />
+        <Avatar src={user.avatar} radius="xl" />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>
-            {name}
+            {user.name}
           </Text>
 
           <Text color="dimmed" size="xs">
-            {email}
+            {user.email}
           </Text>
         </div>
       </Group>

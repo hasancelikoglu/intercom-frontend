@@ -9,16 +9,19 @@ import { UserButton } from './UserButton';
 import { LinksGroup } from './LinksGroup';
 import { NavLink } from 'react-router-dom';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
+import { useAtom } from 'jotai';
+import { userAtom } from '../../atoms/authAtoms';
 
 const mockdata = [
   { label: 'Home', icon: IconHome, link: "/" },
-  { label: 'Profile', icon: IconUser, link: "/user" },
+  { label: 'Profile', icon: IconUser, link: "/user"},
 
   {label: 'Topics', icon: IconHash, link: "/topics"},
   
   {
     label: 'Settings',
     icon: IconSettings,
+    auth: true,
     link: "",
     links: [
       { label: 'Profile settings', link: '/profile/settings' },
@@ -68,7 +71,8 @@ const useStyles = createStyles((theme) => ({
 
 export default function NavbarNested() {
   const { classes } = useStyles();
-  const links = mockdata.map((item) =>  <LinksGroup {...item} key={item.label}/>);
+  const [user] = useAtom(userAtom)
+  const links = mockdata.map((item) => user.user !== false ? <LinksGroup {...item} key={item.label}/> : !item.auth && <LinksGroup {...item} key={item.label}/> );
   const matches = useMediaQuery('(max-width: 768px)')
   const [opened, { toggle }] = useDisclosure(false);
         const label = opened ? 'Close navigation' : 'Open navigation';
@@ -91,12 +95,7 @@ export default function NavbarNested() {
         </Navbar.Section>
   
         <Navbar.Section className={classes.footer}>
-          <UserButton
-            image=""
-            name="Hasan Çelikoğlu"
-            username="hasancelikoglu92"
-            email="hasancelikoglu92@gmail.com"
-          />
+          <UserButton/>
         </Navbar.Section>
       </Navbar>
       )}

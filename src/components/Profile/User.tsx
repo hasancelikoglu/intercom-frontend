@@ -1,5 +1,7 @@
 import { createStyles, Card, Avatar, Text, Group, Button, rem } from '@mantine/core';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { userAtom } from '../../atoms/authAtoms';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -19,25 +21,27 @@ interface UserCardImageProps {
   stats: { label: string; value: string }[];
 }
 
+const stat = ["followers", "following", "posts"]
+
 export function User() {
   const { classes, theme } = useStyles();
 
-  const [user, setUser] = useState({image: "https://fastly.picsum.photos/id/946/1178/400.webp?hmac=Mkcp-vXlq8ujb4xEoCitAJQWtzvboQEisgNCsB06kaY", avatar: "", name: "Hasan Çelikoğlu", username: "@hasancelikoglu0", stats: [{label: "Followers", value: "32"}, {label: "Following", value: "17"}, {label: "Posts", value: "43"}]})
+  const [user, setUser] = useAtom(userAtom)
 
-  const items = user.stats.map((stat) => (
-    <div key={stat.label}>
-      <Text ta="center" fz="lg" fw={500}>
-        {stat.value}
-      </Text>
-      <Text ta="center" fz="sm" c="dimmed">
-        {stat.label}
-      </Text>
-    </div>
-  ));
+  // const items = stats.map((stat, index) => (
+  //   <div key={index}>
+  //     <Text ta="center" fz="lg" fw={500}>
+  //       {user[stat]}
+  //     </Text>
+  //     <Text ta="center" fz="sm" c="dimmed">
+  //       {stat}
+  //     </Text>
+  //   </div>
+  // ));
 
   return (
     <Card withBorder padding="xl" radius="md" w="100%" className={classes.card}>
-      <Card.Section sx={{backgroundImage: `url(${user.image})`, backgroundSize: "cover", height: 400 }} />
+      <Card.Section sx={{backgroundImage: `url('')`, backgroundSize: "cover", height: 400 }} />
       <Avatar src={user.avatar} size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
       <Text ta="center" fz="lg" fw={500} mt="sm">
         {user.name}
@@ -46,7 +50,7 @@ export function User() {
         {user.username}
       </Text>
       <Group mt="md" position="center" spacing={30}>
-        {items}
+        {/* {items} */}
       </Group>
       {/* <Button
         fullWidth
