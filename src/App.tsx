@@ -16,6 +16,7 @@ import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { setUser } from './utils/auth';
 import UserRoute from './components/PrivateRoutes/UserRoute';
 import AuthRoute from './components/PrivateRoutes/AuthRoute';
+import { LoaderComponent } from './components/Loader/LoaderComponent';
 
 export default function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -75,9 +76,16 @@ export default function App() {
     );
   } else {
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <MantineProvider withGlobalStyles
+      withNormalizeCSS
+      theme={{
+        colorScheme
+      }}>
+        <div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <LoaderComponent />
+        </div>
+      </MantineProvider>
+
     )
   }
 }
