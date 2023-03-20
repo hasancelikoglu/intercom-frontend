@@ -56,7 +56,7 @@ export function UserButton({ image, name, username, email }: UserButtonProps) {
       </Group>
       ) : (
         <Flex justify="center" align="center">
-            <Button w="100%">Login</Button>
+            Login
         </Flex>
       )}
       </UnstyledButton>
