@@ -72,7 +72,7 @@ const useStyles = createStyles((theme) => ({
 export default function NavbarNested() {
   const { classes } = useStyles();
   const [user] = useAtom(userAtom)
-  const links = mockdata.map((item) => user.user !== false ? <LinksGroup {...item} key={item.label}/> : !item.auth && <LinksGroup {...item} key={item.label}/> );
+  const links = mockdata.map((item) => user ? <LinksGroup {...item} key={item.label}/> : !item.auth && <LinksGroup {...item} key={item.label}/> );
   const matches = useMediaQuery('(max-width: 768px)')
   const [opened, { toggle }] = useDisclosure(false);
         const label = opened ? 'Close navigation' : 'Open navigation';

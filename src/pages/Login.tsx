@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { userAtom } from '../atoms/authAtoms';
 import { login } from '../services/auth';
 import { getUser } from '../services/user';
-import { setToken, setUser } from '../utils/auth';
+import { setToken } from '../utils/auth';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -56,6 +56,7 @@ export function Login() {
     const { classes } = useStyles();
     const navigate = useNavigate()
     const [data, setData] = useState<LoginData>({email: "", password: ""})
+    const [, setUser] = useAtom(userAtom)
 
     const disabled = data.email === "" || data.password === ""
 
@@ -64,8 +65,8 @@ export function Login() {
 
         try {
             const response = await login(data)
-            localStorage.setItem("token", response.data.accessToken)
             const user = await getUser(response.data.accessToken)
+            localStorage.setItem("token", response.data.accessToken)
             setToken(response.data.accessToken)
             setUser(user.data)
             navigate("/")

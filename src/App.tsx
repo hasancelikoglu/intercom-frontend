@@ -13,7 +13,6 @@ import { useAtom } from 'jotai';
 import { tokenAtom, userAtom } from './atoms/authAtoms';
 import { getUser } from './services/user';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
-import { setUser } from './utils/auth';
 import UserRoute from './components/PrivateRoutes/UserRoute';
 import AuthRoute from './components/PrivateRoutes/AuthRoute';
 import { LoaderComponent } from './components/Loader/LoaderComponent';
@@ -31,7 +30,7 @@ export default function App() {
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
   const [token, setToken] = useAtom(tokenAtom)
-  const [user] = useAtom(userAtom)
+  const [user, setUser] = useAtom(userAtom)
 
   useEffect(() => {
     if (token) {
@@ -46,7 +45,7 @@ export default function App() {
     }
   }, [])
 
-  if ((token && user.user !== false) || (!token)) {
+  if ((token && user) || (!token)) {
     return (
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider

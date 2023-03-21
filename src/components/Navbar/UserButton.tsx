@@ -39,11 +39,11 @@ export function UserButton() {
   const [user] = useAtom(userAtom)
 
   return (
-    <NavLink to={user.user === false ? "/auth/login" : "/user"}>
+    <NavLink to={user ? "/auth/login" : "/user"}>
       <UnstyledButton className={classes.user}>
-      {user.user !== false ? (
+      {user ? (
         <Group>
-        <Avatar src={user.avatar} radius="xl" />
+        <Avatar src="" radius="xl" />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>

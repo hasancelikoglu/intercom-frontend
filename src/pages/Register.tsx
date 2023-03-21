@@ -69,8 +69,8 @@ export function Register() {
 
         try {
             const response = await register(data)
-            localStorage.setItem("token", response.data.accessToken)
             const user = await getUser(response.data.accessToken)
+            localStorage.setItem("token", response.data.accessToken)
             setToken(response.data.accessToken)
             setUser(user.data)
             navigate("/")
