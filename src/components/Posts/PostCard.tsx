@@ -46,7 +46,7 @@ const useStyles = createStyles((theme) => ({
 export function PostCard({post}: any) {
     const { classes } = useStyles();
     const [date, setDate] = useState("")
-    const [liked, setLiked] = useState(post.isLiked ? post.isLiked : false)
+    const [liked, setLiked] = useState(post.isLiked)
     const [likeCounter, setLikeCounter] = useState(post.likes)
     const [commentCounter, setCommentCounter] = useState(post.comments.length)
     const [commentBox, setCommentBox] = useState(false)
