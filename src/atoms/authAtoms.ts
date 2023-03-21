@@ -6,6 +6,7 @@ import {atomWithStorage} from 'jotai/utils'
 
 
 interface User {
+    id: string;
     name: string;
     email: string;
     avatar: string;

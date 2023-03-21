@@ -1,16 +1,18 @@
 import { atom } from "jotai";
 
-interface PostType {
+export interface PostType {
     _id: string;
     title: string;
     content: string;
     author: string;
-    photo_url: null;
+    photo_url: string | null;
     likes: number;
-    isLiked?: boolean;
-    comment: [];
-    createadDate: string;
+    isLiked: boolean;
+    comments: string[];
+    createdDate: string;
+    updatedDate: string;
+    __v: number;
 }
 
-type postAtom = boolean | PostType[]
-export const postsAtom = atom<postAtom>(false)
+type postAtom = null | PostType[]
+export const postsAtom = atom<postAtom>(null)

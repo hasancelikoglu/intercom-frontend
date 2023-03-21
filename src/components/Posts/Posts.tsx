@@ -4,7 +4,7 @@ import { AddPost } from "./AddPost";
 import { useAtom } from "jotai";
 import { tokenAtom } from "../../atoms/authAtoms";
 import { getPosts, getPostsWithAuth } from "../../services/post";
-import { postsAtom } from "../../atoms/postAtoms";
+import { postsAtom, PostType } from "../../atoms/postAtoms";
 import { LoaderComponent } from "../Loader/LoaderComponent";
 
 export default function Posts() {
@@ -18,12 +18,10 @@ export default function Posts() {
             try {
                 if (token) {
                     const authPosts = await getPostsWithAuth(token)
-                    console.log("Auth ile gelen postlar", authPosts.data)
                     setPosts(authPosts.data)
 
                 } else {
                     const allPosts = await getPosts()
-                    console.log("Tüm postlar", allPosts.data)
                     setPosts(allPosts.data)
                 }
             } catch (error) {
@@ -32,7 +30,7 @@ export default function Posts() {
         })()
     }, [])
 
-    console.log()
+    console.log(posts)
 
     
 
@@ -41,10 +39,10 @@ export default function Posts() {
             <div style={{ width: "100%" }}>
                 <AddPost />
                 {/* <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} /> */}
-                {posts.map((post: Object) => (
+                {posts.map((post: PostType) => (
                     // <pre>{JSON.stringify(post, null, 2)}</pre>
                     <>
-                        <PostCard post={post} />
+                        <PostCard key={post._id} post={post} />
                     </>
                 ))}
             </div>
