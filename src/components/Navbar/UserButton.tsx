@@ -39,7 +39,7 @@ export function UserButton() {
   const [user] = useAtom(userAtom)
 
   return (
-    <NavLink to={user ? "/auth/login" : "/user"}>
+    <NavLink to={user ? "/user" : "/auth/login"}>
       <UnstyledButton className={classes.user}>
       {user ? (
         <Group>
