@@ -13,7 +13,7 @@ export default function Topics() {
         <>
             <Container w="100%" h={250}>
                 <Text size={30}>Topics</Text>
-                {topics.map(topic => <Topic topic={topic} />)}
+                {topics.map((topic, index) => <Topic key={index} topic={topic} />)}
             </Container>
         </>
 

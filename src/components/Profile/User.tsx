@@ -1,5 +1,7 @@
 import { createStyles, Card, Avatar, Text, Group, Button, rem } from '@mantine/core';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { userAtom } from '../../atoms/authAtoms';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -19,13 +21,15 @@ interface UserCardImageProps {
   stats: { label: string; value: string }[];
 }
 
+
+
 export function User() {
   const { classes, theme } = useStyles();
+  const [user] = useAtom(userAtom)
+  const stats = [{label: "followers", value: user?.followersCount}, {label: "following", value: user?.followingCount}, {label: "posts", value: user?.postsCount}]
 
-  const [user, setUser] = useState({image: "https://fastly.picsum.photos/id/946/1178/400.webp?hmac=Mkcp-vXlq8ujb4xEoCitAJQWtzvboQEisgNCsB06kaY", avatar: "", name: "Hasan Çelikoğlu", username: "@hasancelikoglu0", stats: [{label: "Followers", value: "32"}, {label: "Following", value: "17"}, {label: "Posts", value: "43"}]})
-
-  const items = user.stats.map((stat) => (
-    <div key={stat.label}>
+  const items = stats.map((stat, index) => (
+    <div key={index}>
       <Text ta="center" fz="lg" fw={500}>
         {stat.value}
       </Text>
@@ -37,13 +41,13 @@ export function User() {
 
   return (
     <Card withBorder padding="xl" radius="md" w="100%" className={classes.card}>
-      <Card.Section sx={{backgroundImage: `url(${user.image})`, backgroundSize: "cover", height: 400 }} />
-      <Avatar src={user.avatar} size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
+      <Card.Section sx={{backgroundImage: `url('')`, backgroundSize: "cover", height: 400 }} />
+      <Avatar src="" size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
       <Text ta="center" fz="lg" fw={500} mt="sm">
-        {user.name}
+        {user?.name}
       </Text>
       <Text ta="center" fz="sm" c="dimmed">
-        {user.username}
+        {user?.username}
       </Text>
       <Group mt="md" position="center" spacing={30}>
         {items}

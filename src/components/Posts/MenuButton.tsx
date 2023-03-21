@@ -8,8 +8,8 @@ export function MenuButton() {
     <Menu>
       <Menu.Target>
         <Button variant="subtle">
-          {dots.map(dot => (
-            <div style={{backgroundColor: "white", width: "4px", height: "4px", margin: "2px", borderRadius: "100%"}}></div>
+          {dots.map((dot, index) => (
+            <div key={index} style={{backgroundColor: "white", width: "4px", height: "4px", margin: "2px", borderRadius: "100%"}}></div>
           ))}
         </Button>
       </Menu.Target>
