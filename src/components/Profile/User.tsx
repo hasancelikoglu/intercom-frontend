@@ -21,20 +21,20 @@ interface UserCardImageProps {
   stats: { label: string; value: string }[];
 }
 
-const stats = ["followers", "following", "posts"]
+
 
 export function User() {
   const { classes, theme } = useStyles();
-
   const [user] = useAtom(userAtom)
+  const stats = [{label: "followers", value: user?.followersCount}, {label: "following", value: user?.followingCount}, {label: "posts", value: user?.postsCount}]
 
   const items = stats.map((stat, index) => (
     <div key={index}>
       <Text ta="center" fz="lg" fw={500}>
-        {user[stat]}
+        {stat.value}
       </Text>
       <Text ta="center" fz="sm" c="dimmed">
-        {stat}
+        {stat.label}
       </Text>
     </div>
   ));
@@ -42,12 +42,12 @@ export function User() {
   return (
     <Card withBorder padding="xl" radius="md" w="100%" className={classes.card}>
       <Card.Section sx={{backgroundImage: `url('')`, backgroundSize: "cover", height: 400 }} />
-      <Avatar src={user.avatar} size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
+      <Avatar src="" size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
       <Text ta="center" fz="lg" fw={500} mt="sm">
-        {user.name}
+        {user?.name}
       </Text>
       <Text ta="center" fz="sm" c="dimmed">
-        {user.username}
+        {user?.username}
       </Text>
       <Group mt="md" position="center" spacing={30}>
         {items}
