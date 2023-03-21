@@ -47,7 +47,7 @@ export function User() {
         {user?.name}
       </Text>
       <Text ta="center" fz="sm" c="dimmed">
-        {user?.username}
+        {user?.name} {user?.username}
       </Text>
       <Group mt="md" position="center" spacing={30}>
         {items}

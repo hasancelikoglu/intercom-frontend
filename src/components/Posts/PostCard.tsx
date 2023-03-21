@@ -20,7 +20,9 @@ import { tokenAtom } from '../../atoms/authAtoms';
 import { likePost, unlikePost } from '../../services/post';
 
 import styles from '../../styles/PostCard.module.css'
-import { AddComment } from './AddComment';
+import { generateDate } from '../../utils/post';
+import { AddComment } from '../Comments/AddComment';
+import Comments from '../Comments/Comments';
 import { MenuButton } from './MenuButton';
 
 const useStyles = createStyles((theme) => ({
@@ -51,6 +53,7 @@ export function PostCard({ post }: any) {
     const [likeCounter, setLikeCounter] = useState(post.likes)
     const [commentCounter, setCommentCounter] = useState(post.comments.length)
     const [commentBox, setCommentBox] = useState(false)
+    const [allCommentsBox, setAllCommentsBox] = useState(false)
     const [token] = useAtom(tokenAtom)
     const navigate = useNavigate()
 
@@ -83,16 +86,18 @@ export function PostCard({ post }: any) {
 
     const commentPostHandle = () => {
         // () => setCommentBox(commentBox => !commentBox)
+        if(token) {
+            setCommentBox(!commentBox)
+            setAllCommentsBox(!allCommentsBox)
+        } else {
+            setAllCommentsBox(!allCommentsBox)
+        }
     }
 
     useEffect(() => {
-        const now = new Date(post.createdDate)
-        const date = now.toLocaleDateString('tr', { weekday: "long", month: "short", day: "numeric" })
-        const time = now.toLocaleTimeString('tr', { hour: "2-digit", minute: "2-digit" })
+        setDate(generateDate(post.createdDate))
 
-        setDate(`${date} ${time}`)
-
-    }, [date])
+    }, [])
 
     return (
         <div>
@@ -123,7 +128,7 @@ export function PostCard({ post }: any) {
                             <span>{likeCounter}</span>
                         </div>
                         <div className={`${styles.button} ${styles.comment}`}>
-                            <IconMessage onClick={() => token ? setCommentBox(!commentBox) : navigate("/auth/login")} cursor="pointer" strokeWidth={1} />
+                            <IconMessage onClick={commentPostHandle} cursor="pointer" strokeWidth={1} />
                             <span>{commentCounter}</span>
                         </div>
                     </Group>
@@ -133,6 +138,7 @@ export function PostCard({ post }: any) {
 
             </Paper>
             {commentBox && <AddComment />}
+            {allCommentsBox && post.comments.length > 0 && <Comments comments={post.comments} />}
 
         </div>
 
