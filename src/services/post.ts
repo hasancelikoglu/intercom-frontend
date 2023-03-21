@@ -13,3 +13,15 @@ export const getPostsWithAuth = async(token: string) => {
     const promise = await HTTP.get("/post")
     return promise
 }
+
+export const likePost = async(token: string, pid: string) => {
+    HTTP.defaults.headers.common['Authorization'] = "Bearer " + token
+    const promise = await HTTP.get("/like/" + pid)
+    return promise
+}
+
+export const unlikePost = async(token: string, pid: string) => {
+    HTTP.defaults.headers.common['Authorization'] = "Bearer " + token
+    const promise = await HTTP.get("/unlike/" + pid)
+    return promise
+}
