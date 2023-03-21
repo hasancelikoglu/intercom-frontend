@@ -30,7 +30,6 @@ export default function Posts() {
         })()
     }, [])
 
-    console.log(posts)
 
     
 
@@ -40,10 +39,7 @@ export default function Posts() {
                 <AddPost />
                 {/* <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} /> */}
                 {posts.map((post: PostType) => (
-                    // <pre>{JSON.stringify(post, null, 2)}</pre>
-                    <>
                         <PostCard key={post._id} post={post} />
-                    </>
                 ))}
             </div>
         )
