@@ -86,7 +86,7 @@ export default function NavbarNested() {
         <Navbar.Section className={classes.header}>
           <Group position="apart">
             {matches && <Burger style={{position: "absolute", left: "10px"}} opened={true} onClick={toggle} aria-label={label} />}
-            <h3>SOCIAL MEDIA APP</h3>
+            <h3>Intercom</h3>
           </Group>
         </Navbar.Section>
   
