@@ -1,48 +1,57 @@
 import { useEffect, useState } from "react";
 import { PostCard } from "./PostCard";
 import { AddPost } from "./AddPost";
+import { useAtom } from "jotai";
+import { tokenAtom } from "../../atoms/authAtoms";
+import { getPosts, getPostsWithAuth } from "../../services/post";
+import { postsAtom } from "../../atoms/postAtoms";
+import { LoaderComponent } from "../Loader/LoaderComponent";
 
 export default function Posts() {
 
-    const [date, setDate] = useState("")
+    
+    const [token] = useAtom(tokenAtom)
+    const [posts, setPosts] = useAtom(postsAtom)
 
     useEffect(() => {
-        const now = new Date()
-        const date = now.toLocaleDateString('tr', { weekday:"long", month:"short", day:"numeric"})
-        const time = now.toLocaleTimeString('tr', { hour: "2-digit", minute: "2-digit" })
+        (async () => {
+            try {
+                if (token) {
+                    const authPosts = await getPostsWithAuth(token)
+                    console.log("Auth ile gelen postlar", authPosts.data)
+                    setPosts(authPosts.data)
 
-        setDate(`${date} ${time}`)
+                } else {
+                    const allPosts = await getPosts()
+                    console.log("Tüm postlar", allPosts.data)
+                    setPosts(allPosts.data)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })()
+    }, [])
 
-    }, [date])
+    console.log()
+
     
-    return (
-        <div>
-            <AddPost/>
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere varius elit at elementum. Phasellus sollicitudin, justo sed commodo congue, leo urna auctor mauris, a feugiat libero diam sit amet nisi. Duis cursus rutrum cursus. Aenean ut erat leo. Pellentesque tempor augue at neque venenatis facilisis. Quisque bibendum pulvinar dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere varius elit at elementum. Phasellus sollicitudin, justo sed commodo congue, leo urna auctor mauris, a feugiat libero diam sit amet nisi. Duis cursus rutrum cursus. Aenean ut erat leo. Pellentesque tempor augue at neque venenatis facilisis. Quisque bibendum pulvinar dolor." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere varius elit at elementum. Phasellus sollicitudin, justo sed commodo congue, leo urna auctor mauris, a feugiat libero diam sit amet nisi. Duis cursus rutrum cursus. Aenean ut erat leo. Pellentesque tempor augue at neque venenatis facilisis. Quisque bibendum pulvinar dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere varius elit at elementum. Phasellus sollicitudin, justo sed commodo congue, leo urna auctor mauris, a feugiat libero diam sit amet nisi. Duis cursus rutrum cursus. Aenean ut erat leo. Pellentesque tempor augue at neque venenatis facilisis. Quisque bibendum pulvinar dolor." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere varius elit at elementum. Phasellus sollicitudin, justo sed commodo congue, leo urna auctor mauris, a feugiat libero diam sit amet nisi. Duis cursus rutrum cursus. Aenean ut erat leo. Pellentesque tempor augue at neque venenatis facilisis. Quisque bibendum pulvinar dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus posuere varius elit at elementum. Phasellus sollicitudin, justo sed commodo congue, leo urna auctor mauris, a feugiat libero diam sit amet nisi. Duis cursus rutrum cursus. Aenean ut erat leo. Pellentesque tempor augue at neque venenatis facilisis. Quisque bibendum pulvinar dolor." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
-            <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} />
+
+    if (posts) {
+        return (
+            <div style={{ width: "100%" }}>
+                <AddPost />
+                {/* <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} /> */}
+                {posts.map((post: Object) => (
+                    // <pre>{JSON.stringify(post, null, 2)}</pre>
+                    <>
+                        <PostCard post={post} />
+                    </>
+                ))}
+            </div>
+        )
+    } else {
+        return <div style={{ width: "100%", height: "500px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <LoaderComponent />
         </div>
-    )
+    }
 }

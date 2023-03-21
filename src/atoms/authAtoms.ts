@@ -6,16 +6,16 @@ import {atomWithStorage} from 'jotai/utils'
 
 
 interface User {
-    name?: string;
-    email?: string;
-    avatar?: string;
-    username?: string;
-    user?: boolean;
-    followers?: number;
-    following?: number;
-    posts?: number;
+    name: string;
+    email: string;
+    avatar: string;
+    username: string;
+    user: boolean;
+    followers: number;
+    following: number;
+    posts: number;
 }
 
 export const strengthAtom = atom(0)
-export const userAtom = atom<User>({user: false})
+export const userAtom = atom<Partial<User>>({user: false})
 export const tokenAtom = atom(localStorage.getItem("token"))
