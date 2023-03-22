@@ -36,7 +36,7 @@ export default function Posts() {
     if (posts) {
         return (
             <div style={{ width: "100%" }}>
-                <AddPost />
+                {token && <AddPost/>}
                 {/* <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} /> */}
                 {posts.map((post: PostType) => (
                         <PostCard key={post._id} post={post} />
