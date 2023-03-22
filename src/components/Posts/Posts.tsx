@@ -9,7 +9,7 @@ import { LoaderComponent } from "../Loader/LoaderComponent";
 
 export default function Posts() {
 
-    
+
     const [token] = useAtom(tokenAtom)
     const [posts, setPosts] = useAtom(postsAtom)
 
@@ -31,16 +31,18 @@ export default function Posts() {
     }, [])
 
 
-    
+
 
     if (posts) {
         return (
             <div style={{ width: "100%" }}>
-                {token && <AddPost/>}
-                {/* <PostCard postedAt={date} body="lorem ipsum dolar sit amet consectur." author={{name: 'Hasan Çelikoğlu', username: "@hasancelikoglu0", image: ''}} /> */}
-                {posts.map((post: PostType) => (
+                {token && <AddPost />}
+
+                <div className="posts" style={{display: "flex", flexDirection: "column-reverse"}}>
+                    {posts.map((post: PostType) => (
                         <PostCard key={post._id} post={post} />
-                ))}
+                    ))}
+                </div>
             </div>
         )
     } else {
