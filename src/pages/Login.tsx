@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { userAtom } from '../atoms/authAtoms';
 import { login } from '../services/auth';
 import { getUser } from '../services/user';
-import { setToken } from '../utils/auth';
+import { setToken, setUserDatas } from '../utils/auth';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -67,8 +67,7 @@ export function Login() {
             const response = await login(data)
             const user = await getUser(response.data.accessToken)
             localStorage.setItem("token", response.data.accessToken)
-            setToken(response.data.accessToken)
-            setUser(user.data)
+            setUserDatas(response.data.accessToken, user.data)
             navigate("/")
         } catch (error: any) {
             return toast.error(error.response.data.message)

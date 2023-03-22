@@ -29,7 +29,7 @@ export default function App() {
 
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
-  const [token, setToken] = useAtom(tokenAtom)
+  const [token] = useAtom(tokenAtom)
   const [user, setUser] = useAtom(userAtom)
 
   useEffect(() => {

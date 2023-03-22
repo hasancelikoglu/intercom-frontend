@@ -21,7 +21,7 @@ import { register } from '../services/auth';
 import { useAtom } from 'jotai';
 import { strengthAtom, userAtom } from '../atoms/authAtoms';
 import { getUser } from '../services/user';
-import { setToken } from '../utils/auth';
+import { setToken, setUserDatas } from '../utils/auth';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -71,8 +71,7 @@ export function Register() {
             const response = await register(data)
             const user = await getUser(response.data.accessToken)
             localStorage.setItem("token", response.data.accessToken)
-            setToken(response.data.accessToken)
-            setUser(user.data)
+            setUserDatas(response.data.accessToken, user.data)
             navigate("/")
         } catch (error: any) {
             toast.error(error.response.data.message)
