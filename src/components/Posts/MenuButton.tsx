@@ -18,7 +18,7 @@ export function MenuButton({postId, authorId}: any) {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Item icon={<IconShare size={14} />} >Share</Menu.Item>
+        <Menu.Item icon={<IconShare size={14} />} onClick={() => navigator.clipboard.writeText(window.location.host + "/post/" + postId)}>Share</Menu.Item>
         {(user && user._id === authorId) && <Menu.Item color="red" icon={<IconTrash size={14} />}>Delete post</Menu.Item>}
       </Menu.Dropdown>
     </Menu>

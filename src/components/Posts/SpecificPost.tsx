@@ -30,10 +30,12 @@ export default function SpecificPost() {
             {post ? (
                 <div>
                     <PostCard specific={true} post={post} />
+                    <Text m={20} size={30}>Comments</Text>
+                    <AddComment/>
                     {post.comments.length > 0 && (
                         <div>
-                            <Text m={20} size={30}>Comments</Text>
-                            <AddComment/>
+                            
+                            
                             <Comments comments={post.comments} />
                         </div>
                     )}
