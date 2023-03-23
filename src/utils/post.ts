@@ -19,11 +19,9 @@ export const getPostsHandle = async () => {
     if (token) {
         const authPosts = await getPostsWithAuth(token)
         defaultStore.set(postsAtom, authPosts.data)
-        console.log("auth posts")
 
     } else if(!token) {
         const allPosts = await getPosts()
         defaultStore.set(postsAtom, allPosts.data)
-        console.log("all posts")
     }
 }

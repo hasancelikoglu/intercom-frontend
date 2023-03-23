@@ -38,7 +38,7 @@ const useStyles = createStyles((theme) => ({
 export function AddPost() {
     const { classes } = useStyles();
     const [token] = useAtom(tokenAtom)
-    const [, setPosts] = useAtom(postsAtom)
+    const [posts, setPosts] = useAtom(postsAtom)
     const [content, setContent] = useState("")
     type RegexType = RegExpMatchArray | null;
     const [hashtags, setHashtags] = useState<RegexType>(null);
@@ -60,8 +60,9 @@ export function AddPost() {
                 formData.append("title", "burasi kaldirilacak")
                 formData.append("content", content)
                 const response = await createPost(token, formData)
+                console.log(response.data)
                 setContent("")
-                setPosts(posts => [...posts, response.data])
+                setPosts([...posts, response.data])
                 console.log(response)
             } catch (error: any) {
                 setContent("")

@@ -101,8 +101,8 @@ export function PostCard({ post }: any) {
                         <Avatar src="" radius="xl" />
                         <div className={styles.postInfos}>
                             <div className={styles.authorInfos}>
-                                <Text fz="sm" className={styles.authorName}>Hasan Çelikoğlu</Text>
-                                <Text fz="xs" className={styles.authorUsername}>@hasancelikoglu92</Text>
+                                <Text fz="sm" className={styles.authorName}>{post.author?.name}</Text>
+                                <Text fz="xs" className={styles.authorUsername}>@{post.author?.username}</Text>
                             </div>
                             <Text fz="xs" c="dimmed">
                                 {date}
