@@ -31,3 +31,8 @@ export const unlikePost = async(token: string, pid: string) => {
     const promise = await HTTP.get("/unlike/" + pid)
     return promise
 }
+
+export const getSpecificPost = async(pid: String) => {
+    const promise = await HTTP.get("/post/" + pid)
+    return promise
+}

@@ -38,6 +38,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     content: {
+        fontSize: "25px",
         '& > p:last-child': {
             marginBottom: 0,
         },
@@ -46,7 +47,7 @@ const useStyles = createStyles((theme) => ({
 
 
 
-export function PostCard({ post }: any) {
+export function PostCard({ post, specific }: any) {
     const { classes } = useStyles();
     const [token] = useAtom(tokenAtom)
     const [date, setDate] = useState("")
@@ -80,11 +81,13 @@ export function PostCard({ post }: any) {
 
     const commentPostHandle = () => {
         // () => setCommentBox(commentBox => !commentBox)
-        if (token) {
-            setCommentBox(!commentBox)
-            setAllCommentsBox(!allCommentsBox)
-        } else {
-            setAllCommentsBox(!allCommentsBox)
+        if (!specific) {
+            if (token) {
+                setCommentBox(!commentBox)
+                setAllCommentsBox(!allCommentsBox)
+            } else {
+                setAllCommentsBox(!allCommentsBox)
+            }
         }
     }
 
@@ -111,7 +114,7 @@ export function PostCard({ post }: any) {
                     </Group>
 
 
-                    <MenuButton postId={post._id} authorId={post.author?._id}/>
+                    <MenuButton postId={post._id} authorId={post.author?._id} />
                 </Flex>
                 <TypographyStylesProvider className={classes.body}>
                     <div className={classes.content} dangerouslySetInnerHTML={{ __html: post.content }} />
