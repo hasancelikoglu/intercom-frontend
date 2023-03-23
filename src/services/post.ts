@@ -31,3 +31,14 @@ export const unlikePost = async(token: string, pid: string) => {
     const promise = await HTTP.get("/unlike/" + pid)
     return promise
 }
+
+export const getSpecificPost = async(pid: String) => {
+    const promise = await HTTP.get("/post/" + pid)
+    return promise
+}
+
+export const deletePost = async(pid: string, token: string) => {
+    HTTP.defaults.headers.common['Authorization'] = "Bearer " + token
+    const promise = await HTTP.delete("/post/" + pid)
+    return promise
+}

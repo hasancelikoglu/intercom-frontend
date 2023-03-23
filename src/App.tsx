@@ -19,6 +19,7 @@ import { LoaderComponent } from './components/Loader/LoaderComponent';
 import LogoutRoute from './components/PrivateRoutes/LogoutRoute';
 import { postsAtom } from './atoms/postAtoms';
 import { toast, Toaster } from 'react-hot-toast';
+import SpecificPost from './components/Posts/SpecificPost';
 
 export default function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -51,6 +52,7 @@ export default function App() {
   // if ((token && user) || (!token)) {
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <Toaster/>
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
@@ -69,8 +71,9 @@ export default function App() {
               </Route>
               <Route path='profile/settings' element={<UserRoute><EditProfile /></UserRoute>} />
               <Route path='topics' element={<Topics />} />
+              <Route path='post/:pid' element={<SpecificPost/>} />
             </Route>
-
+            
             <Route path='/logout' element={<LogoutRoute />} />
 
             <Route path='/auth/login' element={<AuthRoute><Login /></AuthRoute>} />

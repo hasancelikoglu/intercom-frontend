@@ -35,7 +35,6 @@ import { generateDate } from '../../utils/post';
     post: string;
     content: string;
     createdDate: string;
-    __v: number;
   }
   
   interface CommentHtmlProps {
