@@ -16,6 +16,9 @@ import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import UserRoute from './components/PrivateRoutes/UserRoute';
 import AuthRoute from './components/PrivateRoutes/AuthRoute';
 import { LoaderComponent } from './components/Loader/LoaderComponent';
+import LogoutRoute from './components/PrivateRoutes/LogoutRoute';
+import { postsAtom } from './atoms/postAtoms';
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -29,7 +32,7 @@ export default function App() {
 
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
-  const [token, setToken] = useAtom(tokenAtom)
+  const [token] = useAtom(tokenAtom)
   const [user, setUser] = useAtom(userAtom)
 
   useEffect(() => {
@@ -45,17 +48,19 @@ export default function App() {
     }
   }, [])
 
-  if ((token && user) || (!token)) {
-    return (
-      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            colorScheme
-          }}
-        >
+  // if ((token && user) || (!token)) {
+  return (
+    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme
+        }}
+      >
 
+
+        {((token && user) || (!token && !user)) ? (
           <Routes>
             <Route path='/' element={<Home />} >
               <Route index element={<Posts />} />
@@ -66,25 +71,24 @@ export default function App() {
               <Route path='topics' element={<Topics />} />
             </Route>
 
+            <Route path='/logout' element={<LogoutRoute />} />
+
             <Route path='/auth/login' element={<AuthRoute><Login /></AuthRoute>} />
             <Route path='/auth/register' element={<AuthRoute><Register /></AuthRoute>} />
             <Route path='*' element={<NotFound />} />
           </Routes>
-        </MantineProvider>
-      </ColorSchemeProvider>
-    );
-  } else {
-    return (
-      <MantineProvider withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        colorScheme
-      }}>
-        <div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <LoaderComponent />
-        </div>
-      </MantineProvider>
+        ) : (
+          <>
+            <div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <LoaderComponent />
+            </div>
+          </>
+        )}
 
-    )
-  }
+
+
+      </MantineProvider>
+    </ColorSchemeProvider>
+
+  );
 }

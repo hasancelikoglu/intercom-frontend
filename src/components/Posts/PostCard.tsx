@@ -17,9 +17,12 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { tokenAtom } from '../../atoms/authAtoms';
+import { likePost, unlikePost } from '../../services/post';
 
 import styles from '../../styles/PostCard.module.css'
-import { AddComment } from './AddComment';
+import { generateDate } from '../../utils/post';
+import { AddComment } from '../Comments/AddComment';
+import Comments from '../Comments/Comments';
 import { MenuButton } from './MenuButton';
 
 const useStyles = createStyles((theme) => ({
@@ -43,74 +46,83 @@ const useStyles = createStyles((theme) => ({
 
 
 
-export function PostCard({post}: any) {
+export function PostCard({ post }: any) {
     const { classes } = useStyles();
+    const [token] = useAtom(tokenAtom)
     const [date, setDate] = useState("")
-    const [liked, setLiked] = useState(post.isLiked ? post.isLiked : false)
+    const [liked, setLiked] = useState(post.isLiked)
     const [likeCounter, setLikeCounter] = useState(post.likes)
     const [commentCounter, setCommentCounter] = useState(post.comments.length)
     const [commentBox, setCommentBox] = useState(false)
-    const [token] = useAtom(tokenAtom)
+    const [allCommentsBox, setAllCommentsBox] = useState(false)
     const navigate = useNavigate()
 
-    const likePost = () => {
+    const likePostHandle = () => {
         // () => setLiked(liked => !liked)
-        if(token) {
-            if(liked) {
-                setLikeCounter(likeCounter - 1)
-                setLiked(!liked)
+        if (token) {
+            setLikeCounter(liked ? likeCounter - 1 : likeCounter + 1)
+            setLiked(!liked)
+            if (liked) {
+                (async () => {
+                    await unlikePost(token, post._id)
+                })()
+
             } else {
-                setLikeCounter(likeCounter + 1)
-                setLiked(!liked)
+                (async () => {
+                    await likePost(token, post._id)
+
+                })()
             }
         } else {
             navigate("/auth/login")
         }
     }
-    
-    const commentPost = () => {
+
+    const commentPostHandle = () => {
         // () => setCommentBox(commentBox => !commentBox)
+        if (token) {
+            setCommentBox(!commentBox)
+            setAllCommentsBox(!allCommentsBox)
+        } else {
+            setAllCommentsBox(!allCommentsBox)
+        }
     }
 
     useEffect(() => {
-        const now = new Date(post.createdDate)
-        const date = now.toLocaleDateString('tr', { weekday: "long", month: "short", day: "numeric" })
-        const time = now.toLocaleTimeString('tr', { hour: "2-digit", minute: "2-digit" })
+        setDate(generateDate(post.createdDate))
 
-        setDate(`${date} ${time}`)
-
-    }, [date])
+    }, [])
 
     return (
         <div>
             <Paper withBorder radius="md" className={classes.comment}>
                 <Flex align="center" justify="space-between">
                     <Group>
-                    <Avatar src="" radius="xl" />
-                    <div className={styles.postInfos}>
-                        <div className={styles.authorInfos}>
-                            <Text fz="sm" className={styles.authorName}>Hasan Çelikoğlu</Text>
-                            <Text fz="xs" className={styles.authorUsername}>@hasancelikoglu92</Text>
+                        <Avatar src="" radius="xl" />
+                        <div className={styles.postInfos}>
+                            <div className={styles.authorInfos}>
+                                <Text fz="sm" className={styles.authorName}>Hasan Çelikoğlu</Text>
+                                <Text fz="xs" className={styles.authorUsername}>@hasancelikoglu92</Text>
+                            </div>
+                            <Text fz="xs" c="dimmed">
+                                {date}
+                            </Text>
                         </div>
-                        <Text fz="xs" c="dimmed">
-                            {date}
-                        </Text>
-                    </div>
                     </Group>
 
-                    
-                    <MenuButton/>
+
+                    <MenuButton />
                 </Flex>
                 <TypographyStylesProvider className={classes.body}>
                     <div className={classes.content} dangerouslySetInnerHTML={{ __html: post.content }} />
 
                     <Group className={styles.buttons}>
                         <div className={`${styles.button} ${styles.like}`}>
-                            <IconHeart fill={liked ? "red" : "none"} onClick={likePost} cursor="pointer" strokeWidth={1} />
+                            <IconHeart fill={liked ? "red" : "none"} onClick={likePostHandle} cursor="pointer" strokeWidth={1} />
                             <span>{likeCounter}</span>
                         </div>
                         <div className={`${styles.button} ${styles.comment}`}>
-                            <IconMessage onClick={() => token ? setCommentBox(!commentBox) : navigate("/auth/login")} cursor="pointer" strokeWidth={1} />
+                            <IconMessage onClick={commentPostHandle} cursor="pointer" strokeWidth={1} />
                             <span>{commentCounter}</span>
                         </div>
                     </Group>
@@ -119,7 +131,8 @@ export function PostCard({post}: any) {
 
 
             </Paper>
-            {commentBox && <AddComment/>}
+            {commentBox && <AddComment />}
+            {allCommentsBox && post.comments.length > 0 && <Comments comments={post.comments} />}
 
         </div>
 

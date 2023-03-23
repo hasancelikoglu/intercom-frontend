@@ -17,11 +17,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PasswordStrength } from '../components/Auth/PasswordInput';
 
-import { register } from '../services/auth';
+import { login, register } from '../services/auth';
 import { useAtom } from 'jotai';
 import { strengthAtom, userAtom } from '../atoms/authAtoms';
 import { getUser } from '../services/user';
-import { setToken } from '../utils/auth';
+import { setToken, setUserDatas } from '../utils/auth';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -58,32 +58,29 @@ interface IFormData {
 export function Register() {
     const { classes } = useStyles();
     const [data, setData] = useState<IFormData>({ email: "", name: "", password: "" })
-    const [, setUser] = useAtom(userAtom)
     const [strength] = useAtom(strengthAtom)
     const navigate = useNavigate()
 
     const disabled = strength < 100 || data.email === "" || data.name === "" || data.password === ""
 
-    const registerHandle = async(e: any) => {
+    const registerHandle = async (e: any) => {
         e.preventDefault()
-
         try {
-            const response = await register(data)
+            const response = await login(data)
             const user = await getUser(response.data.accessToken)
             localStorage.setItem("token", response.data.accessToken)
-            setToken(response.data.accessToken)
-            setUser(user.data)
+            setUserDatas(response.data.accessToken, user.data)
             navigate("/")
         } catch (error: any) {
-            toast.error(error.response.data.message)
+            return toast.error(error.response.data.message)
         }
     }
 
     return (
         <div className={classes.wrapper}>
-            <Toaster/>
+            <Toaster />
             <Paper className={classes.form} radius={0} p={30}>
-                <IconArrowBackUp color='white' onClick={() => navigate("/")} />
+                <IconArrowBackUp onClick={() => navigate("/")} />
                 <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
                     Register to Intercom!
                 </Title>

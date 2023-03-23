@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { userAtom } from '../atoms/authAtoms';
 import { login } from '../services/auth';
 import { getUser } from '../services/user';
-import { setToken } from '../utils/auth';
+import { setToken, setUserDatas } from '../utils/auth';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -55,20 +55,18 @@ interface LoginData {
 export function Login() {
     const { classes } = useStyles();
     const navigate = useNavigate()
-    const [data, setData] = useState<LoginData>({email: "", password: ""})
+    const [data, setData] = useState<LoginData>({ email: "", password: "" })
     const [, setUser] = useAtom(userAtom)
 
     const disabled = data.email === "" || data.password === ""
 
-    const loginHandle = async (e:any) => {
+    const loginHandle = async (e: any) => {
         e.preventDefault()
-
         try {
             const response = await login(data)
             const user = await getUser(response.data.accessToken)
             localStorage.setItem("token", response.data.accessToken)
-            setToken(response.data.accessToken)
-            setUser(user.data)
+            setUserDatas(response.data.accessToken, user.data)
             navigate("/")
         } catch (error: any) {
             return toast.error(error.response.data.message)
@@ -77,16 +75,16 @@ export function Login() {
 
     return (
         <div className={classes.wrapper}>
-            <Toaster/>
+            <Toaster />
             <Paper className={classes.form} radius={0} p={30}>
-                <IconArrowBackUp color='white' onClick={() => navigate("/")} />
+                <IconArrowBackUp onClick={() => navigate("/")} />
                 <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
                     Welcome back to Intercom!
                 </Title>
 
                 <form onSubmit={loginHandle}>
-                    <TextInput value={data.email} onChange={e => setData((data: any) => ({...data, email: e.target.value}))} type="email" label="Email address" placeholder="hello@gmail.com" size="md" />
-                    <PasswordInput value={data.password} onChange={e => setData((data: any) => ({...data, password: e.target.value }))} label="Password" placeholder="Your password" mt="md" size="md" />
+                    <TextInput value={data.email} onChange={e => setData((data: any) => ({ ...data, email: e.target.value }))} type="email" label="Email address" placeholder="hello@gmail.com" size="md" />
+                    <PasswordInput value={data.password} onChange={e => setData((data: any) => ({ ...data, password: e.target.value }))} label="Password" placeholder="Your password" mt="md" size="md" />
                     <Button disabled={disabled} type='submit' fullWidth mt="xl" size="md">
                         Login
                     </Button>

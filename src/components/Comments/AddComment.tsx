@@ -18,7 +18,7 @@ export function AddComment() {
     const { classes } = useStyles();
 
     return (
-        <div style={{padding: "10px 0px 30px 30px"}}>
+        <div style={{padding: "10px 0px 5px 30px"}}>
             <Paper withBorder radius="md" className={classes.comment}>
                 <Flex>
                     <Avatar src="" radius="xl" />
