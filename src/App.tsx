@@ -52,6 +52,7 @@ export default function App() {
   // if ((token && user) || (!token)) {
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <Toaster/>
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS

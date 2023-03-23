@@ -78,7 +78,6 @@ export function Register() {
 
     return (
         <div className={classes.wrapper}>
-            <Toaster />
             <Paper className={classes.form} radius={0} p={30}>
                 <IconArrowBackUp onClick={() => navigate("/")} />
                 <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>

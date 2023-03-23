@@ -64,6 +64,7 @@ export function AddPost() {
                 setContent("")
                 setPosts([...posts, response.data])
                 console.log(response)
+                return toast.success("Post created successfully")
             } catch (error: any) {
                 setContent("")
                 return toast.error(error.response.data.message)
