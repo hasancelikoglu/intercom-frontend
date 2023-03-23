@@ -1,10 +1,11 @@
-import { Menu, Button, rem, Flex } from '@mantine/core';
+import { Menu, Button, rem, Flex, useMantineColorScheme } from '@mantine/core';
 import { IconSearch, IconShare, IconTrash } from '@tabler/icons-react';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { userAtom } from '../../atoms/authAtoms';
 
 export function MenuButton({postId, authorId}: any) {
+  const theme = useMantineColorScheme()
   const [user] = useAtom(userAtom)
   const dots = ["dot", "dot", "dot"]
   return (
@@ -12,7 +13,7 @@ export function MenuButton({postId, authorId}: any) {
       <Menu.Target>
         <Button variant="subtle">
           {dots.map((dot, index) => (
-            <div key={index} style={{backgroundColor: "white", width: "4px", height: "4px", margin: "2px", borderRadius: "100%"}}></div>
+            <div key={index} style={{backgroundColor: theme.colorScheme === "dark" ? "white" : "black", width: "4px", height: "4px", margin: "2px", borderRadius: "100%"}}></div>
           ))}
         </Button>
       </Menu.Target>
