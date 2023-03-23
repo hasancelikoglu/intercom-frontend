@@ -48,35 +48,29 @@ const useStyles = createStyles((theme) => ({
 
 export function PostCard({ post }: any) {
     const { classes } = useStyles();
+    const [token] = useAtom(tokenAtom)
     const [date, setDate] = useState("")
     const [liked, setLiked] = useState(post.isLiked)
     const [likeCounter, setLikeCounter] = useState(post.likes)
     const [commentCounter, setCommentCounter] = useState(post.comments.length)
     const [commentBox, setCommentBox] = useState(false)
     const [allCommentsBox, setAllCommentsBox] = useState(false)
-    const [token] = useAtom(tokenAtom)
     const navigate = useNavigate()
 
     const likePostHandle = () => {
         // () => setLiked(liked => !liked)
         if (token) {
+            setLikeCounter(liked ? likeCounter - 1 : likeCounter + 1)
+            setLiked(!liked)
             if (liked) {
-
                 (async () => {
-                    setLikeCounter(likeCounter - 1)
-                    setLiked(!liked)
-                    const response = await unlikePost(token, post._id)
-                    console.log(response)
-                    
+                    await unlikePost(token, post._id)
                 })()
 
             } else {
                 (async () => {
-                    setLikeCounter(likeCounter + 1)
-                    setLiked(!liked)
-                    const response = await likePost(token, post._id)
-                    console.log(response)
-                    
+                    await likePost(token, post._id)
+
                 })()
             }
         } else {
@@ -86,7 +80,7 @@ export function PostCard({ post }: any) {
 
     const commentPostHandle = () => {
         // () => setCommentBox(commentBox => !commentBox)
-        if(token) {
+        if (token) {
             setCommentBox(!commentBox)
             setAllCommentsBox(!allCommentsBox)
         } else {

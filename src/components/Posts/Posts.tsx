@@ -2,43 +2,33 @@ import { useEffect, useState } from "react";
 import { PostCard } from "./PostCard";
 import { AddPost } from "./AddPost";
 import { useAtom } from "jotai";
-import { tokenAtom } from "../../atoms/authAtoms";
-import { getPosts, getPostsWithAuth } from "../../services/post";
+import { tokenAtom, userAtom } from "../../atoms/authAtoms";
 import { postsAtom, PostType } from "../../atoms/postAtoms";
 import { LoaderComponent } from "../Loader/LoaderComponent";
+import { getPostsHandle } from "../../utils/post";
 
 export default function Posts() {
 
 
     const [token] = useAtom(tokenAtom)
     const [posts, setPosts] = useAtom(postsAtom)
+    const [user] = useAtom(userAtom)
 
     useEffect(() => {
-        (async () => {
-            try {
-                if (token) {
-                    const authPosts = await getPostsWithAuth(token)
-                    setPosts(authPosts.data)
-
-                } else {
-                    const allPosts = await getPosts()
-                    setPosts(allPosts.data)
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        })()
-    }, [])
-
-
-
+        setPosts(null)
+        try {
+            getPostsHandle()
+        } catch (error: any) {
+            console.log(error)
+        }
+    }, [user])
 
     if (posts) {
         return (
             <div style={{ width: "100%" }}>
                 {token && <AddPost />}
 
-                <div className="posts" style={{display: "flex", flexDirection: "column-reverse"}}>
+                <div style={{display: "flex", flexDirection: "column-reverse"}}>
                     {posts.map((post: PostType) => (
                         <PostCard key={post._id} post={post} />
                     ))}

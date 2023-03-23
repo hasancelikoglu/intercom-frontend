@@ -14,6 +14,12 @@ export const getPostsWithAuth = async(token: string) => {
     return promise
 }
 
+export const createPost = async(token: string, data: FormData) => {
+    HTTP.defaults.headers.common['Authorization'] = "Bearer " + token
+    const promise = await HTTP.post("/post/create", data)
+    return promise
+}
+
 export const likePost = async(token: string, pid: string) => {
     HTTP.defaults.headers.common['Authorization'] = "Bearer " + token
     const promise = await HTTP.get("/like/" + pid)
