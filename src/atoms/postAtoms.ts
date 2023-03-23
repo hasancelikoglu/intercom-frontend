@@ -4,8 +4,8 @@ export interface AuthorType {
     _id: string;
     email: string;
     name: string;
-    profil_photo_url: string;
     username: string;
+    profil_photo_url: string;
 }
 
 export interface CommentType {
@@ -14,7 +14,6 @@ export interface CommentType {
     content: string;
     createdDate: string;
     post: string;
-    __v: 0;
 }
 
 export interface PostType {
@@ -28,7 +27,6 @@ export interface PostType {
     comments: CommentType[];
     createdDate: string;
     updatedDate: string;
-    __v: number;
 }
 
 type postAtom = null | PostType[]

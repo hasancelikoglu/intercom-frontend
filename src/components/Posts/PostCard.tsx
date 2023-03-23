@@ -111,7 +111,7 @@ export function PostCard({ post }: any) {
                     </Group>
 
 
-                    <MenuButton />
+                    <MenuButton postId={post._id} authorId={post.author?._id}/>
                 </Flex>
                 <TypographyStylesProvider className={classes.body}>
                     <div className={classes.content} dangerouslySetInnerHTML={{ __html: post.content }} />

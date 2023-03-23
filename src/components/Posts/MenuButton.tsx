@@ -1,8 +1,11 @@
 import { Menu, Button, rem, Flex } from '@mantine/core';
 import { IconSearch, IconShare, IconTrash } from '@tabler/icons-react';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { userAtom } from '../../atoms/authAtoms';
 
-export function MenuButton() {
+export function MenuButton({postId, authorId}: any) {
+  const [user] = useAtom(userAtom)
   const dots = ["dot", "dot", "dot"]
   return (
     <Menu>
@@ -15,8 +18,8 @@ export function MenuButton() {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Item icon={<IconShare size={14} />}>Share</Menu.Item>
-        <Menu.Item color="red" icon={<IconTrash size={14} />}>Delete post</Menu.Item>
+        <Menu.Item icon={<IconShare size={14} />} >Share</Menu.Item>
+        {(user && user._id === authorId) && <Menu.Item color="red" icon={<IconTrash size={14} />}>Delete post</Menu.Item>}
       </Menu.Dropdown>
     </Menu>
   );

@@ -23,6 +23,8 @@ export default function Posts() {
         }
     }, [user])
 
+    
+
     if (posts) {
         return (
             <div style={{ width: "100%" }}>
