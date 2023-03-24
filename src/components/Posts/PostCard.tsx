@@ -38,7 +38,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     content: {
-        fontSize: "25px",
+        fontSize: rem(20),
         '& > p:last-child': {
             marginBottom: 0,
         },
@@ -53,13 +53,12 @@ export function PostCard({ post, specific }: any) {
     const [date, setDate] = useState("")
     const [liked, setLiked] = useState(post.isLiked)
     const [likeCounter, setLikeCounter] = useState(post.likes)
-    const [commentCounter, setCommentCounter] = useState(post.comments.length)
+    const [comments, setComments] = useState(post.comments)
     const [commentBox, setCommentBox] = useState(false)
     const [allCommentsBox, setAllCommentsBox] = useState(false)
     const navigate = useNavigate()
 
     const likePostHandle = () => {
-        // () => setLiked(liked => !liked)
         if (token) {
             setLikeCounter(liked ? likeCounter - 1 : likeCounter + 1)
             setLiked(!liked)
@@ -126,7 +125,7 @@ export function PostCard({ post, specific }: any) {
                         </div>
                         <div className={`${styles.button} ${styles.comment}`}>
                             <IconMessage onClick={commentPostHandle} cursor="pointer" strokeWidth={1} />
-                            <span>{commentCounter}</span>
+                            <span>{comments.length}</span>
                         </div>
                     </Group>
                 </TypographyStylesProvider>
@@ -134,8 +133,8 @@ export function PostCard({ post, specific }: any) {
 
 
             </Paper>
-            {commentBox && <AddComment />}
-            {allCommentsBox && post.comments.length > 0 && <Comments comments={post.comments} />}
+            {commentBox && <AddComment setComments={setComments} postId={post._id} />}
+            {allCommentsBox && comments.length > 0 && <Comments comments={comments} />}
 
         </div>
 

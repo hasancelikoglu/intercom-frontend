@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { useAtom } from 'jotai';
 import { userAtom } from '../../atoms/authAtoms';
+import SearchBar from '../SearchBar/SearchBar';
 
 const mockdata = [
   { label: 'Home', icon: IconHome, link: "/" },
@@ -88,6 +89,10 @@ export default function NavbarNested() {
             {matches && <Burger style={{position: "absolute", left: "10px"}} opened={true} onClick={toggle} aria-label={label} />}
             <h3>Intercom</h3>
           </Group>
+        </Navbar.Section>
+
+        <Navbar.Section>
+          <SearchBar/>
         </Navbar.Section>
   
         <Navbar.Section grow className={classes.links} component={ScrollArea}>

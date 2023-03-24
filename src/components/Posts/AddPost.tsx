@@ -62,7 +62,7 @@ export function AddPost() {
                 const response = await createPost(token, formData)
                 console.log(response.data)
                 setContent("")
-                setPosts([...posts, response.data])
+                setPosts((posts: any) => ([...posts, response.data]))
                 console.log(response)
                 return toast.success("Post created successfully")
             } catch (error: any) {
