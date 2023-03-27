@@ -26,7 +26,7 @@ interface UserCardImageProps {
 export function User() {
   const { classes, theme } = useStyles();
   const [user] = useAtom(userAtom)
-  const stats = [{label: "followers", value: user?.followersCount}, {label: "following", value: user?.followingCount}, {label: "posts", value: user?.postsCount}]
+  const stats = [{ label: "followers", value: user?.followersCount }, { label: "following", value: user?.followingCount }, { label: "posts", value: user?.postsCount }]
 
   const items = stats.map((stat, index) => (
     <div key={index}>
@@ -41,7 +41,7 @@ export function User() {
 
   return (
     <Card withBorder padding="xl" radius="md" w="100%" className={classes.card}>
-      <Card.Section sx={{backgroundImage: `url('')`, backgroundSize: "cover", height: 400 }} />
+      <Card.Section sx={{ backgroundImage: `url('')`, backgroundSize: "cover", height: 400 }} />
       <Avatar src="" size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
       <Text ta="center" fz="lg" fw={500} mt="sm">
         {user?.name}
@@ -61,7 +61,7 @@ export function User() {
       >
         Follow
       </Button> */}
-      
+
     </Card>
   );
 }
