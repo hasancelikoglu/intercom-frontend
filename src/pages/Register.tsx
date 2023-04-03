@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PasswordStrength } from '../components/Auth/PasswordInput';
 
-import { login, register } from '../services/auth';
+import { register } from '../services/auth';
 import { useAtom } from 'jotai';
 import { strengthAtom, userAtom } from '../atoms/authAtoms';
 import { getUser } from '../services/user';
@@ -66,7 +66,7 @@ export function Register() {
     const registerHandle = async (e: any) => {
         e.preventDefault()
         try {
-            const response = await login(data)
+            const response = await register(data)
             const user = await getUser(response.data.accessToken)
             localStorage.setItem("token", response.data.accessToken)
             setUserDatas(response.data.accessToken, user.data)

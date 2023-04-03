@@ -42,3 +42,9 @@ export const deletePost = async(pid: string, token: string) => {
     const promise = await HTTP.delete("/post/" + pid)
     return promise
 }
+
+export const addComment = async(token: string, data: Object) => {
+    HTTP.defaults.headers.common['Authorization'] = "Bearer " + token
+    const promise = await HTTP.post("/comment/", data)
+    return promise
+}
